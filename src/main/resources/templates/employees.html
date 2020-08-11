@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring boot - aplikacja webowa z MySQL i Thymeleaf!</title>
+</head>
+<body>
+<h1>Spring Boot</h1>
+<br>
+<br>
+<table border="5">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>FIRST NAME</th>
+        <th>LAST NAME</th>
+        <th>ACTION</th>
+    </tr>
+
+    </thead>
+    <tbody>
+    <tr th:each="employee:${employees}">
+        <td th:text="${employee.getId()}"></td>
+        <td th:text="${employee.getFirstName()}"></td>
+        <td th:text="${employee.getLastName()}"></td>
+        <td>EDIT DEL</td>
+
+    </tr>
+
+    </tbody>
+</table>
+<br>
+<br>
+<a>Add Employee:</a>
+<br>
+<form th:action="@{/employees/add-employee}" th:object="${newEmployee}" method="post">
+    <a>First name:<input type="text" th:field="*{firstName}"></a><br>
+    <a>Last name: <input type="text" th:field="*{lastName}"></a><br>
+    <input type="submit" value="Add"><br>
+</form>
+
+</body>
+</html>

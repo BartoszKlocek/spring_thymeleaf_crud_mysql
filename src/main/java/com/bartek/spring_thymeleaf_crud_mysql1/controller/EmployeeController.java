@@ -7,9 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -25,4 +23,16 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
+    @GetMapping
+    public String getAll(Model model) {
+        model.addAttribute("employees", employeeService.getAllEmployees());
+        model.addAttribute("newEmployee", new Employee());
+        return "employees";
+    }
+
+    @PostMapping("/add-employee")
+    public String addEmployee(@ModelAttribute Employee employee){
+        employeeService.addEmployee(employee);
+        return "redirect:/employees";
+    }
 }
